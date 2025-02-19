@@ -1,6 +1,9 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from app.auth.router import router as auth_router
+
+from app.modules.auth.router import router as auth_router
+from app.modules.profiles.router import router as profiles_router
+
 from app.config.settings import get_settings
 
 settings = get_settings()
@@ -16,6 +19,7 @@ app.add_middleware(
 )
 
 app.include_router(auth_router, prefix="/auth", tags=["auth"])
+app.include_router(profiles_router, prefix="/profiles", tags=["profiles"])
 
 if __name__ == "__main__":
     import uvicorn

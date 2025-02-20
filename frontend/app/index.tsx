@@ -1,5 +1,6 @@
 import api from "@/config/api";
 import { Button, Text, View } from "react-native";
+import "@/global.css"
 
 const signup = async (email: string, password: string) => {
   try {

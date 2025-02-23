@@ -15,8 +15,8 @@ export default function Login() {
   const { signIn } = useAuth();
 
   const [form, setForm] = useState({
-    email: "",
-    password: "",
+    email: "tester@gmail.com",
+    password: "password1",
   });
   const {
     errors: { login: errors },

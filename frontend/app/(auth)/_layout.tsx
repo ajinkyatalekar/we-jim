@@ -31,6 +31,12 @@ export default function AuthLayout() {
           title: 'Register',
         }}
       />
+      <Stack.Screen
+        name="password-recovery"
+        options={{
+          title: 'Password Recovery',
+        }}
+      />
     </Stack>
   );
 }

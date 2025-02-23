@@ -2,16 +2,17 @@ import { ScrollView, Text, View, TouchableOpacity } from "react-native";
 import { useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useRouter } from "expo-router";
-import Ionicons from "@expo/vector-icons/Ionicons";
 
 import CustomInput from "@/components/CustomInput";
 import CustomButton from "@/components/CustomButton";
 import { APP_NAME } from "@/config/landing-page-content";
 import Header from "@/components/Header";
 import { useAuthStore } from "@/store/authStore";
+import { useAuth } from "@/context/auth";
 
 export default function Login() {
   const router = useRouter();
+  const { signIn } = useAuth();
 
   const [form, setForm] = useState({
     email: "",
@@ -32,20 +33,23 @@ export default function Login() {
     }
 
     setIsSubmitting(true);
-    router.dismissAll();
-    router.replace("/home");
-    setIsSubmitting(false);
+    try {
+      await signIn(form.email, form.password);
+      router.dismissAll();
+      router.replace("/home");
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleForgotPassword = async () => {
-    setIsSubmitting(true);
-    setIsSubmitting(false);
+    router.replace("/password-recovery");
   };
 
   const handleRegister = async () => {
-    setIsSubmitting(true);
     router.replace("/register");
-    setIsSubmitting(false);
   };
 
   return (

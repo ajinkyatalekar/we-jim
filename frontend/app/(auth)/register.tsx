@@ -12,8 +12,10 @@ import { useState } from "react";
 import CustomInput from "../../components/CustomInput";
 import Header from "@/components/Header";
 import { useAuthStore } from "@/store/authStore";
+import { useAuth } from "@/context/auth";
 
 export default function Register() {
+  const { signUp } = useAuth();
   const {
     errors: { registration: errors },
     validateRegistrationForm,
@@ -37,6 +39,7 @@ export default function Register() {
 
     setIsSubmitting(true);
     try {
+      await signUp(form.email, form.password, form.first_name, form.last_name);
     } catch (error) {
     } finally {
       setIsSubmitting(false);

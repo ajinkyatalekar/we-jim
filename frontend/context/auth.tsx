@@ -5,7 +5,7 @@ type AuthContextType = {
   user: any | null;
   loading: boolean;
   signIn: (email: string, password: string) => Promise<any>;
-  signUp: (email: string, password: string) => Promise<any>;
+  signUp: (email: string, password: string, first_name: string, last_name: string) => Promise<any>;
   signOut: () => Promise<void>;
 };
 
@@ -36,10 +36,16 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     return () => subscription.unsubscribe();
   }, []);
 
-  const signUp = async (email: string, password: string) => {
+  const signUp = async (email: string, password: string, first_name: string, last_name: string) => {
     const { data, error } = await supabase.auth.signUp({
       email,
       password,
+      options: { // TODO: Add first_name and last_name to the user profile
+        data: {
+          first_name,
+          last_name,
+        },
+      },
     });
     if (error) throw error;
     return data;

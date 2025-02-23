@@ -121,8 +121,18 @@ export const useAuthStore = create<AuthStore>((set) => ({
       isValid = false;
     }
 
+    if (form.first_name.trim().includes(' ')) {
+      store.setRegistrationError('first_name', 'No spaces allowed');
+      isValid = false;
+    }
+
     if (!form.last_name.trim()) {
       store.setRegistrationError('last_name', 'Last name is required');
+      isValid = false;
+    }
+
+    if (form.last_name.trim().includes(' ')) {
+      store.setRegistrationError('last_name', 'No spaces allowed');
       isValid = false;
     }
 

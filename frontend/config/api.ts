@@ -9,7 +9,7 @@ const ENV = {
     })
   },
   prod: {
-    API_URL: 'https://your-production-api.com'
+    API_URL: 'https://your-production-api.com' // TODO: change to production api
   }
 };
 

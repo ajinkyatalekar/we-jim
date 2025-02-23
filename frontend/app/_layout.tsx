@@ -4,7 +4,7 @@ import { useFonts } from 'expo-font'
 import "../global.css";
 import { useEffect } from "react";
 import { AuthProvider, useAuth } from "@/context/auth";
-
+import { UserProvider } from "@/context/user";
 function ProtectedRoute() {
   const { user, loading } = useAuth();
   const segments = useSegments();
@@ -57,7 +57,9 @@ export default function RootLayout() {
 
   return (
     <AuthProvider>
-      <ProtectedRoute />
+      <UserProvider>
+        <ProtectedRoute />
+      </UserProvider>
     </AuthProvider>
   );
 }

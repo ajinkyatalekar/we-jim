@@ -40,7 +40,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     const { data, error } = await supabase.auth.signUp({
       email,
       password,
-      options: { // TODO: Add first_name and last_name to the user profile
+      options: {
         data: {
           first_name,
           last_name,

@@ -13,6 +13,11 @@ function ProtectedRoute() {
   useEffect(() => {
     if (!loading) {
       const inAuthGroup = segments[0] === '(auth)' || segments[0] === '(landing)';
+
+      // Special case for password reset - Allow user to stay on the page
+      if (segments[1] === 'password-reset') {
+        return
+      }
       
       // If the user is not logged in and not in the auth group, redirect to the landing page
       if (!user && !inAuthGroup) {
@@ -26,6 +31,7 @@ function ProtectedRoute() {
 
   return (
     <Stack>
+      <Stack.Screen name="index" options={{ headerShown: false }} />
       <Stack.Screen name="(landing)" options={{ headerShown: false }} />
       <Stack.Screen name="(auth)" options={{ headerShown: false }} />
     </Stack>

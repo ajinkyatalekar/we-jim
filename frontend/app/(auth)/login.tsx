@@ -45,7 +45,7 @@ export default function Login() {
   };
 
   const handleForgotPassword = async () => {
-    router.replace("/password-recovery");
+    router.push("/password-recovery");
   };
 
   const handleRegister = async () => {

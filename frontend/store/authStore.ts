@@ -17,10 +17,11 @@ interface AuthErrors {
 interface AuthStore {
   errors: AuthErrors;
   setLoginError: (field: keyof AuthErrors['login'], message: string) => void;
-  setRegistrationError: (field: keyof AuthErrors['registration'], message: string) => void;
-  clearLoginErrors: () => void;
-  clearRegistrationErrors: () => void;
   validateLoginForm: (email: string, password: string) => boolean;
+  clearLoginErrors: () => void;
+
+
+  setRegistrationError: (field: keyof AuthErrors['registration'], message: string) => void;
   validateRegistrationForm: (form: {
     first_name: string;
     last_name: string;
@@ -28,6 +29,8 @@ interface AuthStore {
     password: string;
     confirmPassword: string;
   }) => boolean;
+  clearRegistrationErrors: () => void;
+
 }
 
 export const useAuthStore = create<AuthStore>((set) => ({
